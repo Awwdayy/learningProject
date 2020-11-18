@@ -1,14 +1,7 @@
 "use strict";
 
-let numberOfFilms = prompt("How many movies did you watch?", "");
-// while (numberOfFilms == null){
-//     numberOfFilms = prompt("How many movies did you watch?", "");
-//     if (numberOfFilms != null){
-//         while(numberOfFilms.length < 1 || numberOfFilms.length > 50){
-//             numberOfFilms = prompt("How many movies did you watch?", "");
-//         }
-//     }
-// }
+let numberOfFilms; 
+// start(); 
 
 const obj = {
     count: numberOfFilms,
@@ -18,39 +11,51 @@ const obj = {
     privat: false
 };
 
-if (obj.count < 10 && obj.count >= 0){
-    alert("Просмотрено мало фильмов!");
-} else if (obj.count >= 10 && obj.count <= 30){
-    alert("Вы классический зритель!");
-} else if (obj.count > 30){
-    alert("Вы киноман!");
-} else {
-    alert("Произошла ошибка!");
-}
+function start() {
+    numberOfFilms = +prompt("How many movies did you watch?", "");
 
-for (let i = 0; i < 2; i++){
-    let a = prompt("What was the last movie you watched?", "");
-    // while (a == null){
-    //     a = prompt("What was the last movie you watched?", "");
-    //     if(a != null){
-    //         while(a.length < 1 || a.length > 50){
-    //             a = prompt("What was the last movie you watched?", "");
-    //         }
-    //     }
-    // }
-    let b = prompt("How do you rate the last movie?", "");
-    // while (b == null){
-    //     b = prompt("How do you rate the last movie?", "");
-    //     if(b != null){
-    //         while((b.length > 50) || (b.length < 1)){
-    //             b = prompt("How do you rate the last movie?", "");
-    //         }
-    //     }
-    // } 
-    if (a != null && b != null && a.length != "" && b.length != "" && a.length < 50 && b.length < 50){
-        obj.movies[a] = b;
-    } else {
-        i--;
+    while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
+        numberOfFilms = +prompt("How many movies did you watch?", "");
     }
 }
-console.log(obj);
+
+function rememberMyFilms() {
+    for (let i = 0; i < 2; i++){
+        const a = prompt("What was the last movie you watched?", "");
+        const b = prompt("How do you rate the last movie?", "");
+
+        if (a != null && b != null && a.length != "" && b.length != "" && a.length < 50 && b.length < 50){
+            obj.movies[a] = b;
+        } else {
+            i--;
+        }
+    }
+}
+// rememberMyFilms();
+
+function detectPersonalLevel(){
+    if (obj.count < 10 && obj.count >= 0){
+        alert("Просмотрено мало фильмов!");
+    } else if (obj.count >= 10 && obj.count <= 30){
+        alert("Вы классический зритель!");
+    } else if (obj.count > 30){
+        alert("Вы киноман!");
+    } else {
+        alert("Произошла ошибка!");
+    }
+}
+detectPersonalLevel();
+
+function showMyDB(){
+    if (obj.privat == false) {
+        console.log(obj);
+    }
+}
+showMyDB();
+
+function writeYourGenres(){
+    for(let i=1; i<4; i++){
+        obj.genres[i-1] = prompt("Ваш любимый жанр под номером " +i, "");
+    }
+}
+writeYourGenres();
