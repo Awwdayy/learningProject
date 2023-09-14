@@ -1,13 +1,228 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width= , initial-scale=1.0">
-    <title>Document</title>
+    <title>Timer</title>
+    <!-- <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        #timer-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            width: 97%;
+            max-width: 1600px; 
+            margin: 0 auto;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #input-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+            flex: 0 0 48%;
+        }
+
+        label {
+            display: block;
+        }
+
+        input[type="number"] {
+            width: 100%;
+        }
+
+        #progress-container {
+            margin-top: 20px;
+            width: 100%;
+            height: 40px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .progress-bar-container {
+            flex: 1;
+            background-color: #ddd;
+            height: 40px;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 0;
+            color: white;
+        }
+
+        .percentage-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .percentage {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        #reset-button {
+            background-color: #ff5555;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #reset-button:hover {
+            background-color: #ff0000;
+        }
+
+        #start-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #start-button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <p>Hello World hey hey!</p>
-
+    <div id="timer-container">
+        <h1>Timer</h1>
+        <div id="input-container">
+            <div class="input-group">
+                <label for="years">Years:</label>
+                <input type="number" id="years" min="0" value="0">
+            </div>
+            <div class="input-group">
+                <label for="months">Months:</label>
+                <input type="number" id="months" min="0" value="0">
+            </div>
+            <div class="input-group">
+                <label for="weeks">Weeks:</label>
+                <input type="number" id="weeks" min="0" value="0">
+            </div>
+            <div class="input-group">
+                <label for="days">Days:</label>
+                <input type="number" id="days" min="0" value="0">
+            </div>
+            <div class="input-group">
+                <label for="hours">Hours:</label>
+                <input type="number" id="hours" min="0" value="0">
+            </div>
+            <div class="input-group">
+                <label for="minutes">Minutes:</label>
+                <input type="number" id="minutes" min="0" max="59" value="0">
+            </div>
+            <div class="input-group">
+                <label for="seconds">Seconds:</label>
+                <input type="number" id="seconds" min="0" max="59" value="0">
+            </div>
+        </div>
+        <button id="start-button" onclick="startTimer()">Start Timer</button>
+        <div id="progress-container">
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div> </br>
+        </div>
+        <div class="percentage">0.000000%</div>
+             <div> <button id="reset-button" onclick="resetTimer()">Reset Timer</button></div>   -->
+            
+     <div>Hello world!</div>
     <script src="js/praktika.js"></script>
+
+    <!-- <script>
+        let timerInterval;
+        let startTime;
+        let elapsedTime = 0;
+        const progressBar = document.querySelector(".progress-bar");
+        const percentageElement = document.querySelector(".percentage");
+
+        function startTimer() {
+            const yearsInput = parseInt(document.getElementById("years").value) || 0;
+            const monthsInput = parseInt(document.getElementById("months").value) || 0;
+            const weeksInput = parseInt(document.getElementById("weeks").value) || 0;
+            const daysInput = parseInt(document.getElementById("days").value) || 0;
+            const hoursInput = parseInt(document.getElementById("hours").value) || 0;
+            const minutesInput = parseInt(document.getElementById("minutes").value) || 0;
+            const secondsInput = parseInt(document.getElementById("seconds").value) || 0;
+
+            const totalTime =
+                yearsInput * 31536000000 + // 1 year in milliseconds
+                monthsInput * 2628000000 + // 1 month in milliseconds
+                weeksInput * 604800000 + // 1 week in milliseconds
+                daysInput * 86400000 + // 1 day in milliseconds
+                hoursInput * 3600000 + // 1 hour in milliseconds
+                minutesInput * 60000 + // 1 minute in milliseconds
+                secondsInput * 1000; // 1 second in milliseconds
+
+            startTime = Date.now();
+
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                elapsedTime = Date.now() - startTime;
+                const percentage = (elapsedTime / totalTime) * 100;
+                progressBar.style.width = percentage + "%";
+
+                if (percentage <= 50) {
+                    progressBar.style.backgroundColor = `rgb(255, ${Math.round(
+                        (255 * percentage) / 50
+                    )}, 0)`;
+                } else {
+                    progressBar.style.backgroundColor = `rgb(${Math.round(
+                        (255 * (100 - percentage)) / 50
+                    )}, ${Math.round(
+                        (255 * (125 - percentage)) / 50
+                    )}, 0)`;
+                }
+
+                percentageElement.textContent = percentage.toFixed(6) + "%";
+
+                if (elapsedTime >= totalTime) {
+                    clearInterval(timerInterval);
+                    progressBar.style.width = "100%";
+                    percentageElement.textContent = "0.000000%";
+                }
+            }, 1);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            progressBar.style.width = "0%";
+            percentageElement.textContent = "0.000000%";
+        }
+    </script> -->
 </body>
 </html>
